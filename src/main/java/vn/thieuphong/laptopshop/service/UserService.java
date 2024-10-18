@@ -1,12 +1,19 @@
 package vn.thieuphong.laptopshop.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+
+import vn.thieuphong.laptopshop.domain.User;
+import vn.thieuphong.laptopshop.repository.UserRepository;
 
 @Service
 public class UserService {
-  @GetMapping("")
-  public String handleHello() {
-    return "Hello from user service";
+  private final UserRepository userRepository;
+
+  public UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+
+  public User handleSaveUser(User user) {
+    return this.userRepository.save(user);
   }
 }
