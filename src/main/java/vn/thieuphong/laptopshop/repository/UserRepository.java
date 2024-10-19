@@ -13,5 +13,8 @@ import vn.thieuphong.laptopshop.domain.User;
 public interface  UserRepository extends JpaRepository<User, Long> {
   @Override
   User save(@SuppressWarnings("null") User user);
+
   List<User> findByEmail(String email);
+
+  List<User> findAll();
 }

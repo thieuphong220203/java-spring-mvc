@@ -25,7 +25,7 @@
             <div class="col-md-6 col-12 mx-auto">
               <h2>Create User</h2>
               <hr>
-              <form:form method="post" accept-charset="UTF-8" action="/admin/user/create1" modelAttribute="newUser">
+              <form:form method="post" accept-charset="UTF-8" action="/admin/user/create" modelAttribute="newUser">
                 <div class="mb-3">
                   <label class="form-label">Email:</label>
                   <form:input path="email" type="email" class="form-control" />
