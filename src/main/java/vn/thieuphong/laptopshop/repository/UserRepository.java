@@ -1,13 +1,17 @@
 package vn.thieuphong.laptopshop.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import vn.thieuphong.laptopshop.domain.User;
 
+
 //crud: create, read, update, delete
 @Repository
-public interface  UserRepository extends CrudRepository<User, Long> {
+public interface  UserRepository extends JpaRepository<User, Long> {
   @Override
   User save(@SuppressWarnings("null") User user);
+  List<User> findByEmail(String email);
 }
