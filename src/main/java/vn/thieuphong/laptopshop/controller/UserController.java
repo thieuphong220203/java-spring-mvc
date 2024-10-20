@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import vn.thieuphong.laptopshop.domain.User;
 import vn.thieuphong.laptopshop.service.UserService;
@@ -55,8 +57,45 @@ public class UserController {
   @RequestMapping("/admin/user/{id}") //GET
   public String getUserDetailPage(@PathVariable("id") long id, Model model) {
     System.out.print("check path id = " + id);
+    User user = this.userService.getUserById(id);
+    model.addAttribute("user", user);
     model.addAttribute("id", id);
     return "/admin/user/show";
+  }
+
+  @RequestMapping("/admin/user/update") //GET
+  public String updateUserPage(@RequestParam("id") long id, Model model) {
+    User user = this.userService.getUserById(id);
+    model.addAttribute("newUser", user);
+    return "admin/user/update";
+  }
+  
+  @PostMapping("/admin/user/update") 
+  public String postUpdateUser(@ModelAttribute("newUser") User user) {
+    User currentUser = this.userService.getUserById(user.getId());
+    if (currentUser != null) {
+      System.out.println("run here");
+      currentUser.setFullName(user.getFullName());
+      currentUser.setPassword(user.getPassword());
+      currentUser.setPhone(user.getPhone());
+      currentUser.setAddress(user.getAddress());
+      this.userService.handleSaveUser(currentUser);
+    }
+    return "redirect:/admin/user";
+  }
+
+  @RequestMapping("/admin/user/delete/{id}") //GET
+  public String deleteUserPage(@PathVariable("id") long id, Model model) {
+    model.addAttribute("id", id);
+    model.addAttribute("newUser", new User());
+
+    return "/admin/user/delete";
+  }
+  
+  @PostMapping("/admin/user/delete") 
+  public String postDeleteUser(@ModelAttribute("newUser") User user) {
+    this.userService.deleteUserById(user.getId());
+    return "redirect:/admin/user";
   }
 }
 

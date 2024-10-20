@@ -28,17 +28,21 @@
             </div>
             <hr>
 
-            <div class="card" style="width: 60%;">
+            <div class="card mx-auto" style="width: 60%;">
               <div class="card-header">
                 User Information
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: 1</li>
-                <li class="list-group-item">Email: </li>
-                <li class="list-group-item">FullName: </li>
-                <li class="list-group-item">Address: </li>
+                <li class="list-group-item">ID: ${user.id}</li>
+                <li class="list-group-item">Email: ${user.email}</li>
+                <li class="list-group-item">Full Name: ${user.fullName}</li>
+                <li class="list-group-item">Address: ${user.address}</li>
               </ul>
             </div>
+            <div class="d-flex justify-content-center">
+              <a href="/admin/user" class="btn btn-success mt-3">Back</a>
+            </div>
+
           </div>
         </div>
       </div>
