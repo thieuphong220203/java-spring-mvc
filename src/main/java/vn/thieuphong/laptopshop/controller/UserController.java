@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,7 +33,7 @@ public class UserController {
   @RequestMapping("/admin/user") //GET
   public String getUserPage(Model model) {
     List<User> users = this.userService.getAllUsers();
-    System.out.println(">>> check users: " + users);
+    // System.out.println(">>> check users: " + users);
     model.addAttribute("users", users);
     return "admin/user/table-user";
   }
@@ -49,6 +50,13 @@ public class UserController {
     User user = this.userService.handleSaveUser(newUser);
     System.out.println(user);
     return "redirect:/admin/user";
+  }
+
+  @RequestMapping("/admin/user/{id}") //GET
+  public String getUserDetailPage(@PathVariable("id") long id, Model model) {
+    System.out.print("check path id = " + id);
+    model.addAttribute("id", id);
+    return "/admin/user/show";
   }
 }
 
